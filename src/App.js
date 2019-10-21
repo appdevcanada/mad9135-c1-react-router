@@ -5,6 +5,7 @@ import Home from './Home'
 import ToDos from './Todos'
 import ToDosId from './TodosId'
 import Comments from './Comments'
+import CommentsId from './CommentsId'
 
 class App extends React.Component {
   render() {
@@ -13,8 +14,9 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/todos" component={ToDos} />
-          <Route path="/todosId" component={ToDosId} />
+          <Route path="/todosId/:userId" component={ToDosId} />
           <Route path="/comments" component={Comments} />
+          <Route path="/commentsId/:userId" component={CommentsId} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

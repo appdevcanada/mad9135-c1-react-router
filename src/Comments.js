@@ -33,7 +33,7 @@ class Comments extends React.Component {
       <div>
         <Header />
         {this.state.list.length === 0 &&
-          <h1 className="error">Albums List is Empty</h1>}
+          <h1 className="error">Comments List is Empty</h1>}
         {this.state.list.length > 0 &&
           this.state.list.map((item) => (
             <div key={item.id} className="card bg-light m-1">

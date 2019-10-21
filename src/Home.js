@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from './Header';
+import ToDosId from './TodosId';
+import CommentsId from './CommentsId';
 import { Button } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -31,6 +33,18 @@ class Home extends React.Component {
       })
   }
 
+  loadToDos = (e) => {
+    console.log("ID Parent: " + e.target.id);
+    this.props.history.push(`/todosId/${e.target.id}`, { name: e.target.value });
+    return (<ToDosId />);
+  }
+
+  loadComments = (e) => {
+    console.log("ID Parent: " + e.target.id);
+    this.props.history.push(`/commentsId/${e.target.id}`, { name: e.target.value });
+    return (<CommentsId />);
+  }
+
   render() {
     return (
       <div>
@@ -49,10 +63,10 @@ class Home extends React.Component {
                   </div>
                   <div className="d-flex align-items-start flex-column ml-auto">
                     <div className="mb-auto">
-                      <Button id={item.id} className="btn btn-info" style={{ width: 100 }}>To Dos</Button>
+                      <Button onClick={this.loadToDos} value={item.name} id={item.id} className="btn btn-info" style={{ width: 100 }}>To Dos</Button>
                     </div>
                     <div >
-                      <Button id={item.id} className="btn btn-info">Comments</Button>
+                      <Button onClick={this.loadComments} value={item.name} id={item.id} className="btn btn-info" style={{ width: 100 }}>Comments</Button>
                     </div>
                   </div>
                 </div>

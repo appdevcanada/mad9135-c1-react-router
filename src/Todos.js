@@ -25,8 +25,8 @@ class ToDos extends React.Component {
     fetch(url)
       .then(response => response.json())
       .then(this.listOfToDos)
-      .catch(err => {
-        this.setState({ error: err })
+      .catch(error => {
+        this.setState({ error })
       })
   }
 
