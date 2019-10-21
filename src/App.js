@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
+import Home from './Home'
+import ToDos from './Todos'
+import ToDosId from './TodosId'
+import Comments from './Comments'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/todos" component={ToDos} />
+          <Route path="/todosId" component={ToDosId} />
+          <Route path="/comments" component={Comments} />
+          <Route component={NotFound} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+}
+
+class NotFound extends React.Component {
+  render() {
+    return (
+      <h1 className="error">&nbsp;Error 404 - URL Not Found</h1>
+    );
+  }
 }
 
 export default App;
