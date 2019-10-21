@@ -1,13 +1,16 @@
 import React from 'react';
 import Header from './Header';
+import spinner from './spinner.svg';
 import 'bootstrap/dist/css/bootstrap.css';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 class CommentsId extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       list: [],
-      error: null
+      error: null,
+      showLabel: true
     };
   }
 
@@ -28,12 +31,23 @@ class CommentsId extends React.Component {
       .catch(error => {
         this.setState({ error })
       })
+    this.setState({ showLabel: false })
   }
 
   render() {
     return (
       <div>
         <Header />
+        <CSSTransitionGroup
+          transitionName="fade"
+          transitionAppear={true}
+          transitionAppearTimeout={800}
+          transitionEnterTimeout={800}
+          transitionLeaveTimeout={800}>
+          {this.state.showLabel &&
+            <div className="App"><img src={spinner} alt="spinner" height="50px" width="50px" /></div>}
+        </CSSTransitionGroup>
+
         <h3 className="App-header">Name: {this.props.location.state.name}</h3>
         {this.state.list.length === 0 &&
           <h1 className="error">Comments List is Empty</h1>}

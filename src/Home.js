@@ -3,7 +3,9 @@ import Header from './Header';
 import ToDosId from './TodosId';
 import CommentsId from './CommentsId';
 import { Button } from 'reactstrap';
+import spinner from './spinner.svg'
 import 'bootstrap/dist/css/bootstrap.css';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 
 class Home extends React.Component {
@@ -11,7 +13,8 @@ class Home extends React.Component {
     super(props);
     this.state = {
       list: [],
-      error: null
+      error: null,
+      showLabel: true
     }
   }
 
@@ -31,6 +34,7 @@ class Home extends React.Component {
       .catch(error => {
         this.setState({ error })
       })
+    this.setState({ showLabel: false })
   }
 
   loadToDos = (e) => {
@@ -49,8 +53,16 @@ class Home extends React.Component {
     return (
       <div>
         <Header />
-        {this.state.list.length === 0 &&
-          <h1 className="error">User List is Empty</h1>}
+        <CSSTransitionGroup
+          transitionName="fade"
+          transitionAppear={true}
+          transitionAppearTimeout={800}
+          transitionEnterTimeout={800}
+          transitionLeaveTimeout={800}>
+          {this.state.showLabel &&
+            <div className="App"><img src={spinner} alt="spinner" height="50px" width="50px" /></div>}
+        </CSSTransitionGroup>
+
         {this.state.list.length > 0 &&
           this.state.list.map((item) => (
             <div key={item.id} className="card bg-light m-1">
@@ -73,6 +85,8 @@ class Home extends React.Component {
               </div>
             </div>
           ))}
+        {this.state.list.length === 0 &&
+          <h1 className="error">User List is Empty</h1>}
         {this.state.error &&
           <h3 className="error">{this.state.error}</h3>}
       </div>

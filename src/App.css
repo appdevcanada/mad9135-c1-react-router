@@ -45,10 +45,45 @@ li{
   color: hsl(0, 93%, 57%);
 }
 
-.users {
-  font-size: 2rem;
+/* CSSTransitionGroup Classes  */
+/* For the initial page load */
+.fade-appear {
+  opacity: 0.01;
+}
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  text-align: center;
+  transition: all 800ms;
 }
 
-.todos {
-  color: rgb(30, 136, 148);
+/* As elements are added to the DOM */
+.fade-enter {
+  opacity: 0.01;
+  transform: scale(1, 0);
+  overflow: hidden;
+}
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  text-align: center;
+  transform: scale(1, 1);
+  transition: opacity 800ms ease-in, transform 800ms ease-out;
+}
+
+/* As elements are removed from the DOM */
+.fade-leave {
+  opacity: 0.01;
+  height: 180px;
+  will-change: height;
+}
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  text-align: center;
+  height: 2px;
+  color: transparent;
+  background-color: hsl(0, 85%, 40%);
+  transition:
+    opacity 800ms ease-out,
+    background-color 800ms linear,
+    height 800ms ease-out,
+    color 800ms linear
 }
